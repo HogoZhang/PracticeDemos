@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en" ng-app="labelApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Example-组件实例-labelSelectComponent</title>
+  <script src="../angular.min.js"></script>  
+  <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+  <script src="index.js"></script>
+  <script src="labelSelectComponent.js"></script>
+</head>
+<body ng-controller="MainCtrl as ctrl">
+  <div style="width: 1000px;">
+    <label-select-component label-config="ctrl.infectConfig" get-selected="ctrl.getFector(selected)"></label-select-component>
+  </div>
+</body>
+</html>

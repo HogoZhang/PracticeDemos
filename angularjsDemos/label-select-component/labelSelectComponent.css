@@ -1,0 +1,49 @@
+.label-select-component {
+    display: flex;
+    position: relative;
+    flex-wrap:nowrap;
+    min-height: 24px;
+}
+
+.labels-title {
+    font-size: 14px;
+    line-height: 24px;
+    white-space:nowrap;
+}
+.labels-box {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+.label-item {
+    display: flex;
+    min-width: 120px;
+    max-height: 24px;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 4px;
+    margin-bottom: 8px;
+    text-align: center;
+    padding: 5px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 12px;
+    background-color:rgba(147,164,253,0.3);
+}
+.label-name {
+    max-width: 95px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    padding-right: 10px;
+}
+.label-item:hover,.label-item.active {
+    background-color: rgba(147,164,253,1);
+    color: #fff;
+}
+.label-trigger {
+    position:absolute;
+    right:10px;
+    top:5px
+}

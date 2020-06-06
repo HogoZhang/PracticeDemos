@@ -1,0 +1,20 @@
+<link rel="stylesheet" type="text/css" href="./labelSelectComponent.css" /> 
+<div class="label-select-component">
+    <div class="labels-title">{{$ctrl.labelConfig.title}}：</div>
+    <div class="labels-box" ng-style="{'max-height':$ctrl.more?(($sctrl.getLabels().currentRows*32-8)+'px'):($sctrl.minRows*32-8)+'px'}">
+    <div class="label-item"
+        ng-repeat="label in $ctrl.labelConfig.list"
+        ng-click="$ctrl.select(label)"
+        ng-class="{active:$ctrl.activeLabels.indexOf(label)>-1}">
+        <div class="lable-name">{{label.name}}</div>
+        <!-- |unit -->
+        <div class="lable-count">{{label.count}}</div>
+    </div>
+    <div class="label-trigger" ng-show="$ctrl.labelConfig.list.length>$ctrl.getLabels().labelsLength">
+        <a href="" ng-click="$ctrl.more=!$ctrl.more">
+            {{$ctrl.more?'收起':'更多'}}
+        </a>
+    </div>
+    <div ng-if="!$ctrl.label.labelconfig.list.length===0">暂无数据</div>
+    </div>
+</div>
