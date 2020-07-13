@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <title>Example-组件实例-labelSelectComponent</title>
   <script src="../angular.min.js"></script>  
-  <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+  <script src="../lodash.min.js"></script>
   <script src="index.js"></script>
   <script src="labelSelectComponent.js"></script>
 </head>
 <body ng-controller="MainCtrl as ctrl">
+  <span>已选择地区：</span><span style="color: tomato;font-weight: bold;">{{ctrl.selected.name}}</span>
   <div style="width: 1000px;">
     <label-select-component label-config="ctrl.infectConfig" get-selected="ctrl.getFector(selected)"></label-select-component>
   </div>

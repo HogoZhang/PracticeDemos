@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="./labelSelectComponent.css" /> 
 <div class="label-select-component">
     <div class="labels-title">{{$ctrl.labelConfig.title}}：</div>
-    <div class="labels-box" ng-style="{'max-height':$ctrl.more?(($sctrl.getLabels().currentRows*32-8)+'px'):($sctrl.minRows*32-8)+'px'}">
+    <div class="labels-box" ng-style="{'max-height':$ctrl.more?(($sctrl.getLabels().currentRows*32-8)+'px'):($ctrl.minRows*32-8)+'px'}">
     <div class="label-item"
         ng-repeat="label in $ctrl.labelConfig.list"
         ng-click="$ctrl.select(label)"

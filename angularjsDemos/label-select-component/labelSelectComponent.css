@@ -15,6 +15,7 @@
     flex-grow: 1;
     flex-wrap: wrap;
     overflow: hidden;
+    font-size: 12px;
 }
 .label-item {
     display: flex;
@@ -25,10 +26,9 @@
     margin-right: 4px;
     margin-bottom: 8px;
     text-align: center;
-    padding: 5px 12px;
+    padding: 4px 12px;
     border-radius: 15px;
     cursor: pointer;
-    font-size: 12px;
     background-color:rgba(147,164,253,0.3);
 }
 .label-name {
