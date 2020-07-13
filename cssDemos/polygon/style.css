@@ -1,0 +1,136 @@
+.box {
+    display  : flex;
+    flex-wrap: wrap;
+}
+
+.box div {
+    margin: 1rem 1rem;
+}
+
+.polygon_1 {
+    width        : 100px;
+    height       : 100px;
+    background   : #2ea44f;
+    border-radius: 50%;
+}
+
+.polygon_2 {
+    width        : 200px;
+    height       : 100px;
+    background   : #2ea44f;
+    border-radius: 100px / 50px;
+}
+
+.polygon_3 {
+    width        : 0;
+    height       : 0;
+    border-left  : 50px solid transparent;
+    border-right : 50px solid transparent;
+    border-bottom: 100px solid #2ea44f;
+}
+
+.polygon_4 {
+    width       : 0;
+    height      : 0;
+    border-left : 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top  : 100px solid #2ea44f;
+}
+
+.polygon_5 {
+    width        : 0;
+    height       : 0;
+    border-top   : 50px solid transparent;
+    border-right : 100px solid #2ea44f;
+    border-bottom: 50px solid transparent;
+}
+
+.polygon_6 {
+    width        : 0;
+    height       : 0;
+    border-left  : 100px solid #2ea44f;
+    border-top   : 50px solid transparent;
+    border-bottom: 50px solid transparent;
+}
+
+.polygon_7 {
+    width       : 0;
+    height      : 0;
+    border-top  : 100px solid #2ea44f;
+    border-right: 100px solid transparent;
+}
+
+.polygon_8 {
+    width      : 0;
+    height     : 0;
+    border-top : 100px solid #2ea44f;
+    border-left: 100px solid transparent;
+}
+
+.polygon_9 {
+    width        : 0;
+    height       : 0;
+    border-bottom: 100px solid #2ea44f;
+    border-right : 100px solid transparent;
+}
+
+.polygon_10 {
+    width        : 0;
+    height       : 0;
+    border-bottom: 100px solid #2ea44f;
+    border-left  : 100px solid transparent;
+}
+
+.polygon_11 {
+    position    : relative;
+    width       : 0;
+    height      : 0;
+    border-top  : 9px solid transparent;
+    border-right: 9px solid #ffce43;
+    transform   : rotate(10deg);
+}
+
+.polygon_11:after {
+    content      : "";
+    position     : absolute;
+    border       : 0 solid transparent;
+    border-top   : 3px solid #ffce43;
+    border-radius: 20px 0 0 0;
+    top          : -12px;
+    left         : -9px;
+    width        : 12px;
+    height       : 12px;
+    transform    : rotate(45deg);
+}
+.polygon_12 {
+    border-bottom: 100px solid #ffce43;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    height: 0;
+    width: 100px;
+}
+.polygon_13 {
+    width: 150px;
+    height: 100px;
+    transform: skew(20deg);
+    background: #ffce43;
+}
+.polygon_14 {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid #ffce43;
+    position: relative;
+}
+.polygon_14:after {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 100px solid #ffce43;
+    position: absolute;
+    content: "";
+    top: 30px;
+    left: -50px;
+}
