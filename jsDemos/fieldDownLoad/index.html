@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件下载方式</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div style="display: flex;justify-content: space-around;padding: 2rem 0;">
+        <button onclick="downOpenUrl()">下载方式一</button>
+        <div>
+            <input id="file" type="file" placeholder="选择文件">
+            <button onclick="downFileReader()">下载方式二</button>
+            <a href="data:text/plain;base64,CQ0KCcDg0M0gIMSjv+kgIC3E2sjdDQoNCglhZGQgYXNzZXRMZWRnZXIgLUxpc3QgYWRkcyBzb3J0aW5nIGNhcGFiaWxpdHkgIA0KIA0KCdDC1PYg18qy+syo1csgLcHQse3U9rzTxcXQ8rmmxNwNCg0KDQoNCgkxLsDg0M2w/MCotauyu8/e09qjqGFkZC91cGRhdGUvZGVsZXRlL290aGVyo6kgICANCgkyLsTayN2yu7Osuf0xNbj219a3+w0KCTMu1tDTos7Et73KvdGh1PHSu9bWvLS/yQ=="
+                download>防屏蔽</a>
+        </div>
+        <button onclick="downFileReader()">下载方式三</button>
+    </div>
+
+    <script>
+        //普通下载
+        function downOpenUrl() {
+            window.open('http://down9.5156edu.com/showzipdown4.php?f_type1=2&id=96098');
+        }
+        //reader-file方式下载
+        function downFileReader() {
+            let file = document.querySelector('#file').files[0];
+            if (!file) {
+                alert('先选择文件');
+            } else {
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (e => {
+                    let a = document.createElement('a');
+                    //a.download = 'abc.txt';
+                    a.href = e.target.result;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                });
+            }
+        }
+        //原始二进制数据Blob格式下载
+        let data = undefined;
+        new Blob(data);//下载方式同上
+    </script>
+</body>
+
+</html>
