@@ -62,6 +62,21 @@
         })
       }
     }
+
+
+    //分享2：
+
+    if(res.data && res.data.assetData && res.data.assetData.list) {
+      this.list = res.data.assetData.list
+    }else {
+      this.list = [];
+    }
+
+
+    this.list = res.data && res.data.assetData && res.data.assetData.list || [];
+
+    //分享3：
+    trunk
   </script>
 </body>
 
