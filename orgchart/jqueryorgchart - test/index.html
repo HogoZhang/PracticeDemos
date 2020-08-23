@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>orgchart</title>
+	<link rel="stylesheet" href="css/jquery.orgchart.css" />
+	<!-- <link rel="stylesheet" href="css/orgchart/index.css" /> -->
+	<!-- <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script> -->
+	<script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./js/js/jquery.orgchart.js"></script>
+</head>
+
+<body>
+	<div id="chart-container"></div>
+	<script type="text/javascript">
+		$(function () {
+
+			var datascource = {
+				'name': '高质量发展',
+				'bg_color': 'color1',
+				'children': [{
+						'name': '人口',
+						'bg_color': 'color1',
+						'children': [{
+								'name': '本地劳动力',
+								'bg_color': 'color1'
+							},
+							{
+								'name': '年轻城市分布',
+								'bg_color': 'color1'
+							}
+						]
+					},
+					{
+						'name': '产业',
+						'bg_color': 'color2',
+						'children': [{
+								'name': '一月.月活跃度',
+								'bg_color': 'color2'
+							},
+							{
+								'name': '二月.月活跃度',
+								'bg_color': 'color2',
+								'children': [{
+										'name': '(4)GDP年预期',
+										'bg_color': 'color2'
+									},
+									{
+										'name': '制造业集中度',
+										'bg_color': 'color2'
+									}
+								]
+							},
+							{
+								'name': '三月.月活跃度',
+								'bg_color': 'color2'
+							}
+						]
+					},
+					{
+						'name': "环保",
+						'bg_color': 'color3',
+						'children': [{
+								'name': '事件预警',
+								'bg_color': 'color3'
+							},
+							{
+								'name': '环境口碑年度',
+								'bg_color': 'color3'
+							}
+						]
+					},
+					{
+						'name': "稳定",
+						'bg_color': 'color4',
+						'children': [{
+								'name': '事件预警',
+								'bg_color': 'color4'
+							},
+							{
+								'name': '监测详情',
+								'bg_color': 'color4'
+							},
+							{
+								'name': '维稳效果指数',
+								'bg_color': 'color4'
+							}
+						]
+					},
+					{
+						'name': "社会名声",
+						'bg_color': 'color5',
+						'children': [{
+								'name': '医疗',
+								'bg_color': 'color5'
+							},
+							{
+								'name': '教育',
+								'bg_color': 'color5',
+								'children': [{
+										'name': '路网',
+										'bg_color': 'color5'
+									},
+									{
+										'name': '房产居住获得感',
+										'bg_color': 'color5'
+									}
+								]
+							},
+							{
+								'name': '公交',
+								'bg_color': 'color5'
+							}
+						]
+					},
+					{
+						'name': "城市配套",
+						'bg_color': 'color6',
+						'children': [{
+								'name': '交通建设',
+								'bg_color': 'color6'
+							},
+							{
+								'name': '文化建设',
+								'bg_color': 'color6'
+							},
+							{
+								'name': '生活服务',
+								'bg_color': 'color6'
+							}
+						]
+					},
+				]
+			};
+
+			var nodeTemplate = function (data) {
+				return `
+		<div class="title">${data.name}</div>
+		<div class="content">
+			<select>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+		</div>
+	`;
+			};
+
+			var oc = $('#chart-container').orgchart({
+				'data': datascource,
+				'direction': 'l2r',
+				'nodeTemplate': nodeTemplate,
+			});
+
+		});
+	</script>
+</body>
+
+</html>

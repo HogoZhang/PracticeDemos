@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" ng-app="labelApp">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Example-组件实例-labelSelectComponent</title>
+  <script src="../angular.min.js"></script>
+  <script src="../lodash.min.js"></script>
+  <script src="index.js"></script>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body ng-controller="MainCtrl as ctrl">
+  <script type="text/ng-template" id="categoryTree">
+    {{ category.title }}
+    <ul ng-if="category.categories">
+        <li ng-repeat="category in category.categories" ng-include="'categoryTree'">           </li>
+    </ul>
+</script>
+  <div style="width: 1000px;display: flex;position: relative;">
+    <!-- <ul>
+      <li ng-repeat="category in categories" ng-include="'categoryTree'"></li>
+    </ul> -->
+    <div class="start" style="width: 80px;height:30px;">开始</div>
+    <div class="box">
+      <div class="item"></div>
+    </div>
+  </div>
+</body>
+
+</html>
