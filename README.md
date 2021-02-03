@@ -1,5 +1,5 @@
 # web-practice
-工作学习中自己写的或者收集的一些不错的实用小样
+茶余饭后的练习与收藏
 
 * [CSS]()
   * [1.奇形怪状](https://hogozhang.github.io/web-practice/cssDemos/polygon)
