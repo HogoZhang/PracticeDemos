@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>带图例控制的柱状图-Bar</title>
+        <script src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            h2 {
+                padding-left: 850px;
+            }
+            svg {
+                margin-left: 650px;
+            }
+        </style>
+    </head>
+   
+    <body>
+        <h2>demo6:带图例控制的柱状图-Mind</h2>
+        <svg width="850" height="800"></svg>
+    </body>
+    
+    <script>
+        window.onload = function() {
+            
+            var datax = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+            var datay = [
+                [60, 100, 75, 40, 35, 55, 65],
+                [50, 50, 65, 35, 25, 60, 70],
+                [80, 60, 60, 45, 20, 70, 60]
+            ];
+            // 用来保存点击时的状态
+            var legendStatus = [true, true, true];
+                padding = {
+                    top: 40,
+                    right: 40,
+                    bottom: 40,
+                    left: 40
+                };
+            var sp = ['#f25d8e','#f3a034','#23c9ed'];
+            var svg = d3.select("svg")
+            var width = svg.attr("width");
+    	    var height = svg.attr("height"); 
+            svg.append('svg')
+                .attr('width', width + 'px')
+                .attr('height', height + 'px');
+               
+            // x轴
+            var xScale = d3.scaleOrdinal()
+                .domain(datax)
+                .range([100, 200, 300, 400, 500, 600, 700]);
+            var xAxis = d3.axisBottom()
+                .scale(xScale)
+                .tickSize(10);
+            svg.append('g')
+                .call(xAxis)
+                .attr("transform", "translate(0," + (height - padding.bottom) + ")")
+                .selectAll("text")
+                .attr("dx", "50px")
+                .attr("font-size", "14px");
+                
+            // y轴      
+            var yScale = d3.scaleLinear()
+                .domain([0, d3.max(d3.merge([datay[0], datay[1], datay[2]]))])
+                .range([height - padding.bottom, padding.top]);
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(10);
+            svg.append('g')
+                .call(yAxis)
+                .attr("transform", "translate(" + 100 + ",0)");
+            
+            datay.forEach(function(item, index) {
+                var bar = svg.selectAll(".bar" + index)
+                    .data(item)
+                    .enter().append("g")
+                    .attr("class", "bar" + index)
+                    .attr("transform", function(d, i) {
+                        var _d = (100 / datay.length) * (index);
+                        return "translate(" + (xScale(i * 100) + _d) + "," + yScale(d) + ")";
+                    });
+                
+                // 柱
+                bar.append("rect")
+                    .attr("x", 1)
+                    .attr("width", (100 / datay.length))
+                    .attr("height", function(d) {
+                        return height - yScale(d) - padding.bottom;
+                    })
+                    .attr("stroke", "White")
+                    .attr("fill", sp[index]);
+                    
+                bar.append("text")
+                    .attr("dy", "1em")
+                    .attr("y", 10)
+                    .attr("x", 100 / (datay.length * 2))
+                    .attr("text-anchor", "middle")
+                    .attr("font-size", "12px")
+                    .attr("fill", "White")
+                    .text(function(d) {
+                        return d;
+                    });
+                
+                // 图例
+                var legend = svg.append('g');
+                var line = legend.append('line')
+                    .attr('x1', 0)
+                    .attr('y1', 2)
+                    .attr('x2', 15)
+                    .attr('y2', 2)
+                    .attr('stroke', sp[index])
+                    .attr('stroke-width', 5);
+                var text = legend.append('text')
+                    .attr('class', 'legend-label')
+                    .attr("dy", -13)
+                    .style("text-anchor", "start")
+                    .text("8号楼" + (index+1) + '食堂')
+                    .attr('fill', "Black")
+                    .attr('font-size', '14')
+                    .attr('cursor', 'pointer')
+                    .attr("transform", "translate(" + 18 + "," + 20 + ")");
+                // 图例对应的点击事件    
+                legend.attr("transform", "translate(" + (padding.left * 3 + index * 100) + "," + padding.top / 2 + ")")
+                    .on("click", function() {
+                        var _this = d3.select(this);
+                        var _i = parseInt(_this.select("text").text().split("8号楼")[1]) -1;
+
+                        if(legendStatus[_i]) {
+                            _this.selectAll("line").attr("stroke", "#d3d3d3");
+                            _this.selectAll("text").attr("fill", "#d3d3d3");
+
+                            svg.selectAll(".bar" + _i)
+                                .attr("display", "none");
+                        } else {
+                            _this.selectAll("line").attr("stroke", sp[_i]);
+                            _this.selectAll("text").attr("fill", "#Black");
+
+                            svg.selectAll(".bar" + _i)
+                                .attr("display", "show");
+                        }
+
+                        legendStatus[_i] = !legendStatus[_i];
+                    });
+            });
+        }
+    </script>
+
+</html>

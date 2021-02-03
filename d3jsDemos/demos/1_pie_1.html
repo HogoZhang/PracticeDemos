@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="UTF-8">
+    <title>基础饼状图-pie</title>
+	<script type="text/javascript" src="http://d3js.org/d3.v5.min.js"></script>
+	<style>
+		h2 {
+			padding-left: 850px;
+		}
+	</style>
+  </head>
+  
+  <body>
+	<h2>demo1:基础饼状图</h2>
+    <svg width="1900" height="500"></svg>
+    <script>
+    	var marge = {top:0,bottom:0,left:0,right:0}
+    	var svg = d3.select("svg")
+    	var width = svg.attr("width")
+    	var height = svg.attr("height")
+    	var g = svg.append("g")
+    		.attr("transform","translate("+marge.top+","+marge.left+")");
+    		
+    	var dataset = [ 60 , 20 , 86 , 110 , 32];
+    	
+    	//颜色比例尺
+    	var colorScale = d3.scaleOrdinal()
+    		.domain(d3.range(dataset.length))
+    		.range(d3.schemeCategory10);
+    	
+    	//新建饼状图
+    	var pie = d3.pie();
+    	
+    	//新建一个扇形生成器
+    	var innerRadius = 0;
+    	var outerRadius = 100;
+    	var arc_generator = d3.arc()
+    		.innerRadius(30)
+    		.outerRadius(100);
+    		
+    	//真实数据处理为饼状图的数据
+    	var pieData = pie(dataset);
+    	console.log(pieData);
+    	
+    	//绘饼
+    	var gs = g.selectAll(".g")
+    		.data(pieData)
+    		.enter()
+    		.append("g")
+    		.attr("transform","translate("+width/2+","+height/2+")")
+    		
+    	//绘扇
+    	gs.append("path")
+    		.attr("d",function(d){
+    			return arc_generator(d);
+    		})
+    		.attr("fill",function(d,i){
+    			return colorScale(i);
+    		});
+    		
+    	//填充文字
+    	gs.append("text")
+    		.attr("transform",function(d){
+    			return "translate("+arc_generator.centroid(d)+")";
+    		})
+    		.attr("text-anchor","middle")
+    		.text(function(d){
+    			return d.data;
+    		})
+    	
+    </script>
+  </body>
+</html>

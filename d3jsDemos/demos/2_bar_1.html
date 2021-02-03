@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>基础柱状图-bar</title>
+	<script type="text/javascript" src="http://d3js.org/d3.v5.min.js"></script>
+	<style>
+		h2 {
+			padding-left: 850px;
+		}
+	</style>
+  </head>
+  
+  <body>
+	<h2>demo2:基础柱状图</h2>
+    <svg width="1900" height="600"></svg>
+    <script>
+    	var marge = {top:60,bottom:0,left:0,right:0};
+    	var dataset = [ 288 , 250 , 200 , 80 , 55 ]; 
+    	var svg = d3.select("svg");
+		var width = svg.attr("width");
+    	var height = svg.attr("height");
+    	var g = svg.append("g")
+    		.attr("transform","translate("+marge.top+","+marge.left+")");
+
+    	//柱子的厚度
+    	var rectHeight = 30;
+    	//绘制
+    	g.selectAll("rect")
+    		.data(dataset)
+    		.enter()
+    		.append("rect")
+    		.attr("x",20)
+    		.attr("y",function(d,i){
+    			return i*rectHeight;
+    		})
+    		.attr("width",function(d){
+    			return d;//注:还可通过设置比例尺设置宽度
+    		})
+    		.attr("height",rectHeight-5)
+    		.attr("fill","#f25d8e").attr("transform","translate("+width/2.5+","+100+")")
+			
+    </script>
+  </body>
+</html>

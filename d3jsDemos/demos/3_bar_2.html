@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>带刻度的柱状图-bar</title>
+	<script type="text/javascript" src="http://d3js.org/d3.v5.min.js"></script>
+	<style>
+		h2 {
+			padding-left: 850px;
+		}
+	</style>
+  </head>
+  
+  <body>
+	<h2>demo3:带刻度的柱状图</h2>
+    <svg width="1900" height="600"></svg>
+    <script>
+    	var marge = {top:60,bottom:60,left:60,right:60}
+    	var svg = d3.select("svg");
+    	var width = svg.attr("width");
+    	var height = svg.attr("height");
+    	var g = svg.append("g")
+    		.attr("transform","translate("+marge.top+","+marge.left+")");
+    	
+    	var dataset = [12,22,32,25,15,42,29,37,22];
+   
+    	var xScale = d3.scaleBand()
+    		.domain(d3.range(dataset.length))
+    		.rangeRound([0,width-marge.left-marge.right]);
+    	var xAxis = d3.axisBottom(xScale);
+    		
+    	var yScale = d3.scaleLinear()
+    		.domain([0,d3.max(dataset)])
+    		.range([height-marge.top-marge.bottom,0]);
+    	var yAxis = d3.axisLeft(yScale);
+    	
+    	g.append("g")
+    		.attr("transform","translate("+0+","+(height-marge.top-marge.bottom)+")")
+    		.call(xAxis);
+    	g.append("g")
+    		.attr("transform","translate(0,0)")
+    		.call(yAxis);
+    		
+    	//绘制柱图
+    	var gs = g.selectAll(".rect")
+    		.data(dataset)
+    		.enter()
+    		.append("g");
+    	
+    	//绘制柱子
+    	var rectPadding = 20;
+    	gs.append("rect")
+    		.attr("x",function(d,i){
+    			return xScale(i)+rectPadding/2;
+    		})	
+    		.attr("y",function(d){
+    			return yScale(d);
+    		})
+    		.attr("width",function(){
+    			return xScale.step()-rectPadding;
+    		})
+    		.attr("height",function(d){
+    			return height-marge.top-marge.bottom-yScale(d);
+    		})
+    		.attr("fill","#ff5d47");
+    	//文字填充
+    	gs.append("text")
+    		.attr("x",function(d,i){
+    			return xScale(i)+rectPadding*4;
+    		})
+    		.attr("y",function(d){
+            return yScale(d);
+        	})
+        	.attr("dx",function(){
+        		(xScale.step()-rectPadding*4);
+        	})
+        	.attr("dy",20)
+        	.text(function(d){
+        		return d;
+        	})
+    </script>
+  </body>
+</html>

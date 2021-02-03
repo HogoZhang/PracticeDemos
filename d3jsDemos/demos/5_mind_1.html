@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>思维导图-Mind</title>
+	<script type="text/javascript" src="http://d3js.org/d3.v5.min.js"></script>
+	<style>
+		h2 {
+			padding-left: 850px;
+		}
+	</style>
+
+  </head>
+  
+  <body>
+    <h2>demo5:思维导图-Mind</h2>
+    <svg width="1900" height="800"></svg>
+    <script>
+    	var marge = {top:+650, bottom:0, left:10, right:0};
+    
+    	var svg = d3.select("svg");
+    	var width = svg.attr("width");
+    	var height = svg.attr("height");
+    	
+    	var g = svg.append("g")
+    		.attr("transform","translate("+marge.top+","+marge.left+")");
+    	
+    	var scale = svg.append("g")
+    		.attr("transform","translate("+marge.top+","+marge.left+")");
+    	//数据
+    	var dataset = {
+    		name:"中能",
+    		children:[
+    			{
+    				name:"中心",
+    				children:[
+    					{name:"冯伟" ,value:100},
+    					{name:"王郑晖",value:100},
+            			{name:"封练",value:100},
+            			{name:"王腾飞",value:100}
+    				]
+    			},
+    			{
+    				name:"前端",
+    				children:[
+    					{
+    						name:"实习",
+    						children:[
+    							{name:"合江",value:100},
+                				{name:"刘美",value:100},
+                				{name:"孙悟空",value:100},
+               					{name:"李相赫",value:100}
+    						]
+    					},
+    					{name:"明显军",value:100},
+            			{name:"张建",value:100},
+            			{name:"郑福康",value:100}
+    				]
+    			},
+    			{
+    				name:"测试",
+    				children:[
+    					{name:"雍明刚",value:100},
+            			{name:"萝莉通",value:100},
+            			{name:"廖玉雪",value:100},
+            			{name:"李扬",value:100}
+    				]
+    			},
+    			{
+    				name:"协议" , 
+        			children:
+        			[
+			            {name:"张**"},
+			            {name:"刘**"},
+			            {name:"孙**"},
+			            {name:"李**"}
+        			]
+    			}
+    		]
+    	};
+    	
+    	//创建一个hierarchy layout
+    	var hierarchyData = d3.hierarchy(dataset)
+    		.sum(function(d){
+    			return d.value;
+    		});
+    		
+    	//创建一个树
+    	var tree = d3.tree()
+    		.size([width-1240,height-200])
+    		.separation(function(a,b){
+    			return (a.parent==b.parent?1:2)/a.depth;
+    		})
+    	
+    	//初始化树状图
+    	var treeData = tree(hierarchyData);
+    	console.log(treeData);
+    	var nodes = treeData.descendants();
+    	var links = treeData.links();
+    	//创建一个贝塞尔生成曲线生成器
+    	var Bézier_curve_generator = d3.linkHorizontal()
+    		.x(function(d) { return d.y; })
+    		.y(function(d) { return d.x; });
+    		
+    	//绘制边
+    	g.append("g")
+    		.selectAll("path")
+    		.data(links)
+    		.enter()
+    		.append("path")
+    		.attr("d",function(d){
+    			var start = {x:d.source.x,y:d.source.y};
+    			var end = {x:d.target.x,y:d.target.y};
+    			return Bézier_curve_generator({source:start,target:end});
+    		})
+    		.attr("fill","none")
+    		.attr("stroke","pink")
+    		.attr("stroke-width",1);
+    		
+    	//绘制节点和文字
+    	var gs = g.append("g")
+    		.selectAll("g")
+    		.data(nodes)
+    		.enter()
+    		.append("g")
+    		.attr("transform",function(d){
+    			var cx = d.x;
+    			var cy= d.y;
+    			return "translate("+cy+","+cx+")";
+    		});
+    	//节点
+    	gs.append("circle")
+    		.attr("r",6)
+    		.attr("fill","white")
+    		.attr("stroke","#00c091")
+    		.attr("stroke-width",1);
+    		
+    	//文字
+    	gs.append("text")
+    		.attr("x",function(d){
+    			return d.children?-40:8;
+    		})
+    		.attr("y",-5)
+    		.attr("dy",10)
+    		.text(function(d){
+    			return d.data.name;
+    		});
+    		
+    </script>
+  </body>
+</html>
